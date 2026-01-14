@@ -1,0 +1,569 @@
+/* =====================================================
+   REST COUNTRIES API - CYBERPUNK NEON THEME
+   ===================================================== */
+
+/* ============= GLOBAL RESET & BODY ============= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', 'Courier New', monospace;
+    background: #0a0e27;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 51, 102, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(0, 255, 255, 0.2) 0%, transparent 50%);
+    min-height: 100vh;
+    padding-bottom: 3rem;
+    color: #00ffff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated Grid Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+/* Scanline Effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent 50%, rgba(0, 255, 255, 0.02) 50%);
+    background-size: 100% 4px;
+    animation: scanline 8s linear infinite;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+@keyframes scanline {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+/* ============= HEADER CARD - NEON GLOW ============= */
+.card.text-center.shadow-sm {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 3px solid #00ffff;
+    border-radius: 0;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.5),
+        0 0 40px rgba(0, 255, 255, 0.3),
+        inset 0 0 60px rgba(0, 255, 255, 0.1);
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card.text-center.shadow-sm::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 51, 102, 0.1) 50%,
+        transparent 70%
+    );
+    animation: hologramShine 3s linear infinite;
+}
+
+@keyframes hologramShine {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.card.text-center.shadow-sm .card-body {
+    padding: 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.card.text-center.shadow-sm .card-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: #00ffff;
+    text-shadow: 
+        0 0 10px #00ffff,
+        0 0 20px #00ffff,
+        0 0 30px #00ffff,
+        0 0 40px #ff3366;
+    margin-bottom: 1rem;
+    animation: glitch 5s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff; }
+    25% { text-shadow: -2px 0 #ff3366, 2px 0 #00ffff, 0 0 30px #00ffff; }
+    50% { text-shadow: 2px 0 #ff3366, -2px 0 #00ffff, 0 0 30px #00ffff; }
+    75% { text-shadow: 0 2px #ff3366, 0 -2px #00ffff, 0 0 30px #00ffff; }
+}
+
+.card.text-center.shadow-sm .card-text {
+    color: #ff3366;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #ff3366;
+}
+
+/* ============= SEARCH PANEL - GLASS MORPHISM ============= */
+.container.mt-4 {
+    background: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(0, 255, 255, 0.2),
+        inset 0 0 20px rgba(0, 255, 255, 0.05);
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.container.mt-4::before {
+    content: '>>> SEARCH_SYSTEM.EXE';
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background: #0a0e27;
+    padding: 5px 15px;
+    color: #00ffff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border: 1px solid #00ffff;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Form Controls */
+.form-control,
+.form-select {
+    background: rgba(10, 14, 39, 0.8);
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+    color: #00ffff;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 10px rgba(0, 255, 255, 0.2),
+        inset 0 0 10px rgba(0, 255, 255, 0.05);
+}
+
+.form-control::placeholder {
+    color: rgba(0, 255, 255, 0.5);
+}
+
+.form-control:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #ff3366;
+    background: rgba(10, 14, 39, 0.9);
+    box-shadow: 
+        0 0 20px rgba(255, 51, 102, 0.5),
+        inset 0 0 10px rgba(255, 51, 102, 0.1);
+    color: #ff3366;
+}
+
+.form-select option {
+    background: #0a0e27;
+    color: #00ffff;
+}
+
+/* Search Button */
+.btn-primary {
+    background: linear-gradient(135deg, #ff3366 0%, #00ffff 100%);
+    border: 2px solid #00ffff;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #0a0e27;
+    text-transform: uppercase;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.5),
+        0 0 40px rgba(255, 51, 102, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '[ SEARCH ]';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.8),
+        0 0 60px rgba(255, 51, 102, 0.5);
+    background: linear-gradient(135deg, #00ffff 0%, #ff3366 100%);
+    border-color: #ff3366;
+}
+
+/* ============= LOADING SPINNER ============= */
+#loading {
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 2px solid #00ffff;
+    box-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.5),
+        inset 0 0 30px rgba(0, 255, 255, 0.1);
+    max-width: 400px;
+    margin: 3rem auto;
+}
+
+#loading .spinner-border {
+    width: 4rem;
+    height: 4rem;
+    border-width: 0.5rem;
+    border-color: #00ffff;
+    border-right-color: transparent;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+#loading p {
+    font-size: 1.2rem;
+    color: #ff3366;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #ff3366;
+}
+
+/* ============= COUNTRY CARDS GRID ============= */
+#display .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+/* ============= COUNTRY CARD - NEON BORDER ============= */
+#display .card {
+    background: rgba(26, 26, 46, 0.7);
+    backdrop-filter: blur(15px);
+    border: 2px solid #00ffff;
+    border-radius: 20px;
+    overflow: hidden;
+    width: calc(25% - 2rem);
+    min-width: 280px;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.3),
+        inset 0 0 20px rgba(0, 255, 255, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+    animation: cardFloat 0.6s ease-out;
+}
+
+@keyframes cardFloat {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#display .card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(0, 255, 255, 0.1) 50%,
+        transparent 70%
+    );
+    animation: cardShine 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#display .card:hover::before {
+    opacity: 1;
+}
+
+@keyframes cardShine {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#display .card:hover {
+    transform: translateY(-15px) scale(1.05);
+    border-color: #ff3366;
+    box-shadow: 
+        0 0 40px rgba(255, 51, 102, 0.6),
+        0 0 60px rgba(0, 255, 255, 0.4),
+        inset 0 0 30px rgba(255, 51, 102, 0.1);
+}
+
+/* Country Flag */
+#display .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 3px solid #00ffff;
+    filter: brightness(0.9) contrast(1.1);
+    transition: all 0.3s;
+}
+
+#display .card:hover .card-img-top {
+    filter: brightness(1.1) contrast(1.2);
+    border-bottom-color: #ff3366;
+}
+
+/* Card Body */
+#display .card-body {
+    padding: 1.8rem;
+    background: linear-gradient(to bottom, rgba(26, 26, 46, 0.9), rgba(10, 14, 39, 0.95));
+    position: relative;
+    z-index: 1;
+}
+
+#display .card-title {
+    color: #00ffff;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid rgba(0, 255, 255, 0.3);
+    padding-bottom: 0.8rem;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+#display .card-text {
+    color: #a0b0c0;
+    font-size: 0.95rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.6;
+    font-family: 'Courier New', monospace;
+}
+
+#display .card-text strong {
+    color: #ff3366;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255, 51, 102, 0.3);
+}
+
+/* ============= NO RESULTS MESSAGE ============= */
+.text-center.mt-4 h4 {
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 3rem;
+    border-radius: 20px;
+    color: #ff3366;
+    font-weight: 700;
+    border: 2px solid #ff3366;
+    box-shadow: 
+        0 0 30px rgba(255, 51, 102, 0.5),
+        inset 0 0 20px rgba(255, 51, 102, 0.1);
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+}
+
+.text-danger {
+    color: #ff3366 !important;
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+}
+
+/* ============= RESPONSIVE DESIGN ============= */
+
+/* Large Desktops */
+@media (min-width: 1400px) {
+    #display .card {
+        width: calc(20% - 2rem);
+    }
+}
+
+/* Tablets and Medium Screens */
+@media (max-width: 1200px) {
+    #display .card {
+        width: calc(33.333% - 2rem);
+    }
+}
+
+@media (max-width: 992px) {
+    .card.text-center.shadow-sm .card-title {
+        font-size: 2.5rem;
+    }
+
+    #display .card {
+        width: calc(50% - 2rem);
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 2rem;
+    }
+
+    .card.text-center.shadow-sm .card-title {
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+
+    .card.text-center.shadow-sm .card-text {
+        font-size: 1rem;
+    }
+
+    .container.mt-4 {
+        padding: 1.5rem;
+    }
+
+    .container.mt-4::before {
+        font-size: 0.7rem;
+        top: -12px;
+    }
+
+    .row.g-2 {
+        gap: 1rem !important;
+    }
+
+    .col-md-4,
+    .col-md-3,
+    .col-md-2 {
+        width: 100%;
+        margin-bottom: 0.8rem;
+    }
+
+    #display .card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    #display .card-img-top {
+        height: 180px;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .card.text-center.shadow-sm .card-title {
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+    }
+
+    .card.text-center.shadow-sm .card-body {
+        padding: 1.5rem;
+    }
+
+    .container.mt-4 {
+        padding: 1.2rem;
+    }
+
+    #display .card-title {
+        font-size: 1.2rem;
+    }
+
+    #display .card-text {
+        font-size: 0.9rem;
+    }
+
+    #display .card-body {
+        padding: 1.5rem;
+    }
+}
+
+/* ============= SCROLLBAR - NEON STYLE ============= */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0e27;
+    border-left: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00ffff, #ff3366);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff3366, #00ffff);
+    box-shadow: 0 0 20px rgba(255, 51, 102, 0.8);
+}
+
+/* ============= ADDITIONAL EFFECTS ============= */
+
+/* Glowing hover effect for inputs */
+.form-control:hover,
+.form-select:hover {
+    border-color: rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* Pulse animation for loading */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+#loading {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Corner brackets decoration */
+.container.mt-4::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    border-top: 2px solid #00ffff;
+    border-right: 2px solid #00ffff;
+    opacity: 0.5;
+}
