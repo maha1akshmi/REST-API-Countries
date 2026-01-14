@@ -1,72 +1,97 @@
 REST Countries Explorer - Cyberpunk Edition
+
 A modern web application to explore countries around the world with a stunning cyberpunk neon theme.
 
-Features
-Display all countries with flags, capitals, regions, population, and country codes
-Search by Country Name, Capital, Region/Continent, or Country Code
-Real-time filtering as you type
-Responsive design for all devices
-Cyberpunk neon theme with glassmorphism effects
-Loading spinner and error handling
-"No results found" message
-Technologies Used
-HTML5
-CSS3 (Cyberpunk theme with animations)
-JavaScript (ES6+)
-Bootstrap 5.3.2
-REST Countries API v3.1
-Project Structure
+--------------------------------------------------
+
+FEATURES
+- Display all countries with flag, capital, region, population, and country code
+- Search by country name, capital, region/continent, or country code
+- Real-time search (search while typing)
+- Fully responsive design
+- Cyberpunk neon UI with glassmorphism effects
+- Loading spinner and error handling
+- "No countries found" message
+
+--------------------------------------------------
+
+TECHNOLOGIES USED
+- HTML5
+- CSS3 (Cyberpunk theme)
+- JavaScript (ES6+)
+- Bootstrap 5.3.2
+- REST Countries API v3.1
+
+--------------------------------------------------
+
+PROJECT STRUCTURE
 rest-countries-explorer/
-├── index.html
-├── style.css
-├── home.js
-└── README.txt
+|-- index.html
+|-- style.css
+|-- home.js
+|-- README.txt
 
-Installation
-Clone the repository: git clone https://github.com/yourusername/rest-countries-explorer.git
-Open index.html in your browser
-How It Works
-Fetches country data from REST Countries API on page load
-Displays all countries in a responsive grid
-Allows filtering by 4 criteria: Name, Capital, Region, Country Code
-Updates results instantly as you type
-API Used
-REST Countries API v3.1 Base URL: https://restcountries.com/v3.1 Endpoint: /all?fields=name,capital,region,population,flags,cca2
+--------------------------------------------------
 
-Key Functions
+INSTALLATION
+1. Clone the repository:
+   git clone https://github.com/yourusername/rest-countries-explorer.git
+
+2. Open index.html in a browser
+
+--------------------------------------------------
+
+HOW IT WORKS
+- Fetches country data on page load
+- Displays all countries in a responsive grid
+- Filters by name, capital, region, or country code
+- Updates results instantly as the user types
+
+--------------------------------------------------
+
+API USED
+REST Countries API v3.1
+Base URL: https://restcountries.com/v3.1
+Endpoint: /all?fields=name,capital,region,population,flags,cca2
+
+--------------------------------------------------
+
+KEY FUNCTIONS
 searchCountry()
+- Filters countries based on selected criteria
+- Updates UI dynamically
 
-Filters countries based on selected search criteria
-Supports name, capital, region, and code searches
-Updates display dynamically
 displayCountries(data)
+- Renders country cards
+- Shows "No countries found" when needed
 
-Renders country cards with flag, name, capital, region, population
-Shows "No countries found" message when search yields no results
-Uses Bootstrap grid for responsive layout
-Responsive Design
-Desktop (1400px+): 5 cards per row
-Large Desktop (1200px): 4 cards per row
-Tablet (992px): 3 cards per row
-Mobile (768px): 2 cards per row
-Small Mobile (480px): 1 card per row
-Browser Support
-Chrome 90+, Firefox 88+, Safari 14+, Edge 90+, Opera 76+
+--------------------------------------------------
 
-Future Enhancements
-Sort countries by name or population
-Click on country for detailed view
-Save favorite countries
-Dark/Light mode toggle
-Export data to CSV
-Author
-Mahalakshmi GitHub: https://github.com/maha1akshmi LinkedIn: https://www.linkedin.com/in/maha1akshmi
+RESPONSIVE DESIGN
+Desktop: 5 cards per row
+Large Desktop: 4 cards per row
+Tablet: 3 cards per row
+Mobile: 2 cards per row
+Small Mobile: 1 card per row
 
-License
+--------------------------------------------------
+
+AUTHOR
+Mahalakshmi
+GitHub: https://github.com/maha1akshmi
+LinkedIn: https://www.linkedin.com/in/maha1akshmi
+
+--------------------------------------------------
+
+LICENSE
 MIT License - Open source and free to use
 
-Acknowledgments
-REST Countries API - https://restcountries.com/ Bootstrap - https://getbootstrap.com/
+--------------------------------------------------
+
+ACKNOWLEDGMENTS
+REST Countries API - https://restcountries.com/
+Bootstrap - https://getbootstrap.com/
+
+--------------------------------------------------
 
 Made with love and coffee
-
